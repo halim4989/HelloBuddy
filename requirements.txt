@@ -1,0 +1,4 @@
+django
+django-redis
+channels-redis
+mysqlclient
