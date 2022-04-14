@@ -1,7 +1,13 @@
 from django.contrib import admin
 
-# Register your models here.
 from .models import Message, Chat
+
+from django.contrib.auth.admin import UserAdmin
+from .models import User
+
+admin.site.register(User, UserAdmin)
+
+
 
 # decorator instade of admin.site.register
 @admin.register(Message)

@@ -3,15 +3,11 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 
-
-# class isAvailable(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name= 'isAvailable')
-#     is_available = models.BooleanField(default=False)
+from django.contrib.auth.models import AbstractUser
 
 
-#     def __str__(self):
-#         # return self.author.username
-#         return self.user.username
+class User(AbstractUser):
+    is_available = models.BooleanField(default=False)
 
 
 class Message(models.Model):
@@ -32,8 +28,6 @@ class Chat(models.Model):
     participants = models.ManyToManyField(User, related_name='chats')
     messages = models.ManyToManyField(Message, blank=True)
 
-    # class Meta:
-    #     ordering = ['participants']
 
     def __str__(self):
         # return str(self.pk)

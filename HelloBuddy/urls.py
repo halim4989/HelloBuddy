@@ -20,8 +20,9 @@ import chat.views as chatV
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('UserStatus/NotAvailable/', chatV.UserStatusNotAvailable, name='chat'),
-    path('UserStatus/Available/', chatV.UserStatusAvailable, name='chat'),
+    path('NewChatWithVolunteer/', chatV.NewChatWithVolunteer, name='NewChatWithVolunteer'),
+    path('UserStatus/NotAvailable/', chatV.UserStatusNotAvailable, name='NotAvailable'),
+    path('UserStatus/Available/', chatV.UserStatusAvailable, name='Available'),
     path('chat/', include('chat.urls', namespace='chat')),
     path('accounts/', include('django.contrib.auth.urls')),
 ]

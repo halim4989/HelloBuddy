@@ -1,7 +1,8 @@
 # chat/views.py
 from django.http import HttpResponse
 from django.shortcuts import redirect, render   
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from .models import Message, Chat
 
 from django.core.cache import cache 
@@ -12,6 +13,8 @@ from django.contrib.auth.decorators import login_required
 # from django.views.decorators.clickjacking import xframe_options_sameorigin
 # from django.views.decorators.clickjacking import xframe_options_exempt
 
+
+User = get_user_model()
 
 # @xframe_options_deny
 # @xframe_options_exempt
@@ -84,7 +87,11 @@ def room(request, ChatUsername):
 
 def UserStatusAvailable(request):
     if request.user.is_authenticated:
-        cache.set(f"{request.user.username}_is_Available", "yes", 7200) # marking user is Available for 2H
+        # cache.set(f"{request.user.username}_is_Available", "yes", 7200) # marking user is Available for 2H
+        # .objects.filter(username = 'halim').update(is_available = True)
+
+        request.user.is_available = True
+        request.user.save()
         return HttpResponse("Your online status is changed to 'Available' \n Now You will be Available to be Contracted by Users")
     else:
         return HttpResponse("Login First")
@@ -92,10 +99,25 @@ def UserStatusAvailable(request):
 def UserStatusNotAvailable(request):
     if request.user.is_authenticated:
         # cache.set(f"{request.user.username}_is_Available", True, 7200) # marking user is Available for 2H
-        cache.delete(f"{request.user.username}_is_Available")
+        # cache.delete(f"{request.user.username}_is_Available")
+
+        request.user.is_available = False
+        request.user.save()
         return HttpResponse("Your online status is changed to 'Not Available'")
     else:
         return HttpResponse("Login First")
+
+
+def NewChatWithVolunteer(request):
+    AvailavleVolunteers = User.objects.filter(is_superuser = 0).filter(is_staff = 1).filter(is_available = 1)
+
+    OnlineVolunteers = [v for v in AvailavleVolunteers if cache.get(v.username) is not None]
+    print(OnlineVolunteers)
+
+    if OnlineVolunteers:
+        return HttpResponse(OnlineVolunteers)
+    else:
+        return HttpResponse("All Volunteers are currently busy! Please wait a moment. And try again later")
 
 
 # def room2(request, room_name):

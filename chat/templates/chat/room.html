@@ -337,6 +337,22 @@ Website: http://emilcarlsson.se/
           // dataType: "json",
           url:"/UserStatus/Available/",
           // data:{
+            //   post_id: catid,
+            // },
+            success: function(data){
+              // alert("i got data now i will parse it as i want to display it");
+              alert(data);
+            }
+            
+          })
+        });
+      // Changing Online status
+      $("#status-busy").click(function(){
+        $.ajax({
+          type:"GET",
+          // dataType: "json",
+          url:"/UserStatus/NotAvailable/",
+          // data:{
           //   post_id: catid,
           // },
           success: function(data){
@@ -346,11 +362,14 @@ Website: http://emilcarlsson.se/
 
         })
       });
-      $("#status-busy").click(function(){
+
+
+      // User asking Volunteers for chat
+      $("#addcontact").click(function(){
         $.ajax({
           type:"GET",
           // dataType: "json",
-          url:"/UserStatus/NotAvailable/",
+          url:"/NewChatWithVolunteer/",
           // data:{
           //   post_id: catid,
           // },
