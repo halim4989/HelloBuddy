@@ -24,5 +24,7 @@ urlpatterns = [
     path('UserStatus/NotAvailable/', chatV.UserStatusNotAvailable, name='NotAvailable'),
     path('UserStatus/Available/', chatV.UserStatusAvailable, name='Available'),
     path('chat/', include('chat.urls', namespace='chat')),
+    path('blog/', include('chat.urls', namespace='blog')),
+    path('ask/', include('chat.urls', namespace='ask')),
     path('accounts/', include('django.contrib.auth.urls')),
 ]
