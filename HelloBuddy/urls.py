@@ -14,17 +14,25 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf.urls import include
+from django.views.generic import TemplateView
+from django.shortcuts import redirect
 from django.contrib import admin
 from django.urls import path
 import chat.views as chatV
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),
+
     path('NewChatWithVolunteer/', chatV.NewChatWithVolunteer, name='NewChatWithVolunteer'),
     path('UserStatus/NotAvailable/', chatV.UserStatusNotAvailable, name='NotAvailable'),
     path('UserStatus/Available/', chatV.UserStatusAvailable, name='Available'),
+
+    path("", lambda req: redirect('/home/')),
+    path('home/', TemplateView.as_view(template_name="webpages/home.html")),
+    path('about/', TemplateView.as_view(template_name="webpages/about.html")),
+    path('experts/', TemplateView.as_view(template_name="webpages/experts.html")),
     path('chat/', include('chat.urls', namespace='chat')),
-    path('blog/', include('chat.urls', namespace='blog')),
-    path('ask/', include('chat.urls', namespace='ask')),
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('blog/', include('blog.urls', namespace='blog')),
+    path('ask/', include('ask.urls', namespace='ask')),
 ]

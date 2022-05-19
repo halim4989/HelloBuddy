@@ -59,7 +59,7 @@ ROOT_URLCONF = 'HelloBuddy.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR, 'templates'],
+        'DIRS': [BASE_DIR / 'templates', ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -120,7 +120,6 @@ DATABASES = {
         # 'PORT': '3306',
         'OPTIONS': {
             'sql_mode': 'STRICT_ALL_TABLES',
-            # 'init_command': "SET sql_mode='STRICT_ALL_TABLES'",
 
             # to save emoji
             'charset': 'utf8mb4',
@@ -167,6 +166,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    # '/var/www/static/',
+]
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

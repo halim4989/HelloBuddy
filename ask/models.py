@@ -15,22 +15,22 @@ def get_deleted_user():
 User = get_user_model()
 
 
-class questions(models.Model):
+class Questions(models.Model):
     author = models.ForeignKey(User, related_name='questions', on_delete = models.SET(get_deleted_user)) # if user is deleted blog post will not be deleted, and show created by [deleted_user]
     question_title = models.CharField(max_length = 100) # enforced at the database level
     full_question = models.TextField() # max_length attribute for HTML Textarea widget of the auto-generated form field, don't have max lenght
     created = models.DateTimeField(default=timezone.now)
 
     class Meta:
-        ordering = ['created']
+        ordering = ['-created']
 
     def __str__(self):
         return self.question_title[:15]
 
 
 
-class answers(models.Model):
-    questions = models.ForeignKey(questions, related_name='answers', on_delete = models.SET(get_deleted_user)) # if user is deleted blog post will not be deleted, and show created by [deleted_user]
+class Answers(models.Model):
+    questions = models.ForeignKey(Questions, related_name='answers', on_delete=models.CASCADE) # if Question is deleted Answear will also be deleted
     author = models.ForeignKey(User, related_name='question_answers', on_delete = models.SET(get_deleted_user)) # if user is deleted blog post will not be deleted, and show created by [deleted_user]
     answer = models.TextField() # max_length attribute for HTML Textarea widget of the auto-generated form field, don't have max lenght
     likes = models.PositiveIntegerField(default = 0)
@@ -38,7 +38,8 @@ class answers(models.Model):
     modified_at = models.DateTimeField(auto_now=True) # updates every time it's modified
 
     class Meta:
-        ordering = ['created_at']
+        ordering = ['-created_at']
 
     def __str__(self):
         return self.answer[:15]
+

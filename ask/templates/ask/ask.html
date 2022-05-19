@@ -1,0 +1,62 @@
+{% extends "webpages/layout.html" %}
+
+
+{% block MainTitle %} Question & Answer {% endblock MainTitle %}
+
+
+{% block title %} Question & Answer {% endblock title %}
+
+
+
+
+{% block body %}
+
+<!-- ASK Start -->
+<div class="container-xxl py-1">
+  <div class="container">
+
+
+    {% for d in data %}
+    <div class="row g-5 align-items-center">
+      <!-- <div class="col-lg-6 wow zoomIn" data-wow-delay="0.1s">
+        <img class="img-fluid" src="img/about.png" />
+      </div> -->
+      <div class="col-lg-10 wow fadeInUp" data-wow-delay="0.1s" style="margin-bottom: 48px;">
+        <h1 class="mb-4">Question: {{d.question}}?</h1>
+        <br />
+        <h3 class="mb-4">Answers</h3>
+
+          {% for ans in d.answers %}
+          <div class="border border-success rounded mb-4">
+            <p id="all-answers"><b>{{ans.author.first_name}} {{ans.author.last_name}}:
+              </b>
+              {{ ans.answer | linebreaksbr }}</p>
+
+            <!-- <div class="container"></div> -->
+            <i class="fas fa-thumbs-up rounded-pill" id="answer-likes"> {{ ans.likes }}</i>
+            <!-- </div> -->
+          </div>
+          <div class="row justify-content-left">
+            <div class="col-lg-11 wow fadeInUp" data-wow-delay="0.3s">
+              <div class="form-floating">
+                <textarea class="form-control" id="answer" style="height: 100px"></textarea>
+                <label for="answer">Write your Answer...</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+    {% endfor %}
+
+
+
+  </div>
+</div>
+
+<!-- ASK End -->
+
+
+
+{% endblock body %}

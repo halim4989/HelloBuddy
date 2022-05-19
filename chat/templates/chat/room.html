@@ -12,7 +12,7 @@
       integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
       crossorigin="anonymous"
     ></script> -->
-    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'chat/js/jquery.min.js' %}"></script>
 
     <!-- <link
       rel="stylesheet"
@@ -20,24 +20,24 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     /> -->
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
-    <!-- <link rel="stylesheet" href="{% static 'css/bootstrap.min.css.map' %}" /> -->
+    <link rel="stylesheet" href="{% static 'chat/css/bootstrap.min.css' %}" />
+    <!-- <link rel="stylesheet" href="{% static 'chat/css/bootstrap.min.css.map' %}" /> -->
 
     <!-- <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script> -->
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'chat/js/bootstrap.min.js' %}"></script>
 
     <link
       rel="stylesheet prefetch"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css"
     />
     <!-- for offline -->
-    <!-- <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" /> -->
+    <!-- <link rel="stylesheet" href="{% static 'chat/css/font-awesome.min.css' %}" /> -->
 
-    <link rel="stylesheet" href="{% static 'css/css_main.css' %}" />
+    <link rel="stylesheet" href="{% static 'chat/css/css_main.css' %}" />
   </head>
 
   <body>
@@ -64,7 +64,7 @@ Website: http://emilcarlsson.se/
             <!-- src="https://ui-avatars.com/api/?background=random&size=720&name={{ user.first_name }}+{{ user.last_name }}" -->
             <img
               id="profile-img"
-              src="{% static 'images/user-profile.png' %}"
+              src="{% static 'chat/images/user-profile.png' %}"
               class="online"
               alt=""
             />
@@ -74,7 +74,7 @@ Website: http://emilcarlsson.se/
 
             <img
               id="profile-img"
-              src="{% static 'images/user-profile.png' %}"
+              src="{% static 'chat/images/user-profile.png' %}"
               class="online"
               alt=""
             />
@@ -141,7 +141,7 @@ Website: http://emilcarlsson.se/
       </div>
       <div class="content">
         <div class="contact-profile">
-          <img src="{% static 'images/user-profile.png' %}" alt="" />
+          <img src="{% static 'chat/images/user-profile.png' %}" alt="" />
           <p>Hasinur Rahman</p>
           <small
             id="screen"
@@ -169,7 +169,7 @@ Website: http://emilcarlsson.se/
             </li>
             <li class="sent">
               <img
-                src="{% static 'images/Facebook_default_male_avatar.jpg' %}"
+                src="{% static 'chat/images/Facebook_default_male_avatar.jpg' %}"
                 alt=""
               />
               <p>
@@ -189,7 +189,7 @@ Website: http://emilcarlsson.se/
             </li>
             <li class="sent">
               <img
-                src="{% static 'images/Facebook_default_male_avatar.jpg' %}"
+                src="{% static 'chat/images/Facebook_default_male_avatar.jpg' %}"
                 alt=""
               />
               <p>
@@ -223,7 +223,7 @@ Website: http://emilcarlsson.se/
         </div>
       </div>
     </div>
-    <script src="{% static 'js/reconnecting-websocket.js' %}"></script>
+    <script src="{% static 'chat/js/reconnecting-websocket.js' %}"></script>
     <script>
       // $("#screen").html($(window).width() + " x " + $(document).width());
 
@@ -436,7 +436,7 @@ Website: http://emilcarlsson.se/
           `<li class="contact">
             <div class="wrap">
               <span class="contact-status online"></span>
-              <img src="{% static 'images/user-profile.png' %}" alt="" />
+              <img src="{% static 'chat/images/user-profile.png' %}" alt="" />
               <div class="meta">
                 <p class='usernameOFchat' id="${userName}" hidden></p>
                 <p class="name">${name} <small>${timeStamp}</small></p>
@@ -488,7 +488,7 @@ Website: http://emilcarlsson.se/
 
         $(
           `<li class= ${className} style="overflow-wrap: break-word">       
-            <img src="{% static 'images/user-profile.png' %}" alt="">
+            <img src="{% static 'chat/images/user-profile.png' %}" alt="">
             <p>
               ${message}<br> 
               <small>

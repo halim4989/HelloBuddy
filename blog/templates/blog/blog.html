@@ -1,0 +1,44 @@
+{% extends "webpages/layout.html" %}
+
+
+{% block MainTitle %} BLOG {% endblock MainTitle %}
+
+
+{% block title %} Blog {% endblock title %}
+
+
+
+
+{% block body %}
+
+
+{% for blog in blogs %}
+
+<!-- BLOG Start -->
+<div class="container-xxl py-1">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <!-- <div class="col-lg-6 wow zoomIn" data-wow-delay="0.1s">
+              <img class="img-fluid" src="img/about.png" />
+            </div> -->
+      <div class="col-lg-10 wow fadeInUp" data-wow-delay="0.1s">
+
+        <h2 class="mb-4"> {{blog.title}} </h2>
+
+        <p id="blog-date-name">{{blog.author.first_name}} {{blog.author.last_name}} <br> {{blog.created_at}}</p>
+
+        <p class="mb-4">
+          {{blog.content | linebreaksbr}}
+        </p>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- BLOG End -->
+
+{% endfor %}
+
+
+
+{% endblock body %}
