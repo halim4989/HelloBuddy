@@ -1,0 +1,31 @@
+{% load static %}
+<link href="{% static 'css/messsage-box.css' %}" rel="stylesheet" />
+
+
+
+<p>We are here to listen to you...</p> 
+
+{% if user.is_authenticated %}
+
+
+<div id="messages-box">
+    
+  <ul>
+ 
+  </ul>
+
+</div>
+
+<div id="volunteer-btn">
+    <b class="bg-info rounded-pill">Talk With a Volunteer</b>
+</div>
+
+{% else %}
+
+<div id="volunteer-btn">
+    <br><br>
+    <br><br>
+    <b class="bg-info rounded-pill">Please Sign in to Talk With a Volunteer</b>
+</div>
+
+{% endif %}

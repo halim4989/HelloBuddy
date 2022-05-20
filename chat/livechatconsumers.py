@@ -1,4 +1,4 @@
-# chat/consumers.py
+# chat/livechatconsumers.py
 import json
 from django.utils import timezone
 from channels.generic.websocket import AsyncWebsocketConsumer
@@ -11,7 +11,7 @@ from .models import Message, Chat
 
 User = get_user_model()
 
-class ChatConsumer(AsyncWebsocketConsumer):
+class LiveChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.chatID = self.scope['url_route']['kwargs']['room_name']
         self.chat_group_name = 'chat_%s' % self.chatID
@@ -42,66 +42,61 @@ class ChatConsumer(AsyncWebsocketConsumer):
         # Loading previous messages
         msgs = await self.load_msgs_from_db()   # reciving list of JSON
         # print(msgs)
-        for msg in reversed(msgs):
+        for msg in msgs:
             # Sending all messages into WebSocket
             await self.send(text_data=json.dumps(msg))
+
+
+
+    async def disconnect(self, close_code):
+        # disconnect room after Websocket Disconnect
+        await self.channel_layer.group_discard(
+            self.chat_group_name,
+            self.channel_name
+        )
+
 
 
     # using decorator to access db in ASGI
     @database_sync_to_async
     def load_msgs_from_db(self):
-        # print(self.scope['user'])
-        # print(self.scope['user'].id)
+       
+        chat = Chat.objects.filter(participants__id = self.scope['user'].id)     
+        if chat:
+            self.chatID = chat[0].id
+            msgs = chat[0].messages.all().order_by('timestamp')
 
-        # msgs = Message.objects.all().order_by('-timestamp') # Last 10 messages
-        # self.chats = Chat.objects.filter(participants__username = self.scope['user']).filter(participants__username = self.chatID)
-        msgs = Chat.objects.get(id = self.chatID).messages.all().order_by('-timestamp')
+            # # checks if user already talking with someone
+            # participants = chat[0].participants.all().count()
+            # if participants == 1:
+            #     isTalking = "no"
+            # else:
+            #     isTalking = "yes"
 
+            # making List with Generator
+            msgsList = [{
+            'sender': msg.author.username,
+            'message': msg.content,
+            'date' : str(msg.timestamp),
+            } for msg in msgs]
+            # print(msgsList)
 
-        # making List with Generator
-        msgsList = [{
-        'sender': msg.author.username,
-        'message': msg.content,
-        'date' : str(msg.timestamp),
-        } for msg in msgs]
-        # print(msgsList)
+            # sending a list of JSON
+            return msgsList
 
-        # sending a list of JSON
-        return msgsList 
-
-    @database_sync_to_async
-    def save_msg_to_db(self, sender, txt):
-        user = User.objects.filter(username=sender)     # username count should be 1
-        if user.count() == 1:
-            # print("RUNNING RUNNING RUNNING ")
-            msg = Message.objects.create(author = user[0], content = txt)
-
-            current_chat = Chat.objects.get(id = self.chatID)
-            # adding msg
-            current_chat.messages.add(msg)
         else:
-            print('**Sent by AnonymousUser**')
+            return []
 
 
 
 
-    
-    async def disconnect(self, close_code):
-        # Leave room group
-        await self.channel_layer.group_discard(
-            self.chat_group_name,
-            self.channel_name
-        )
-        # print(close_code)
-        # print(self.chatID)
 
-
-    # after sending massage -->> WebSocket
+    # after sending massage from UI -->> WebSocket
     # Receive message from WebSocket
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)  # string to JSON
-        print("***receive data***")
-        print(text_data_json)
+        # print("***receive data***")
+        # print(text_data_json)
         sender = text_data_json['sender']
         message = text_data_json['message']
 

@@ -27,6 +27,7 @@ urlpatterns = [
     path('NewChatWithVolunteer/', chatV.NewChatWithVolunteer, name='NewChatWithVolunteer'),
     path('UserStatus/NotAvailable/', chatV.UserStatusNotAvailable, name='NotAvailable'),
     path('UserStatus/Available/', chatV.UserStatusAvailable, name='Available'),
+    path('getchatid/', chatV.GetChatID, name='chatId'),
 
     path("", lambda req: redirect('/home/')),
     path('home/', TemplateView.as_view(template_name="webpages/home.html")),

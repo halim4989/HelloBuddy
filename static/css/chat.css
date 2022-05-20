@@ -3,13 +3,14 @@
     padding: 0;
     font-family: "Lato", sans-serif;
     background-color: #f6f7f9;
-  }
+  } */
 
-  h1 {
+  section aside h1 {
     margin: 0;
     font-size: 16px;
     line-height: 1;
-  } */
+    color: #fff;
+  }
 
   /* button {
     color: inherit;
@@ -20,7 +21,7 @@
   } */
 
   button.chatbox-open {
-    z-index: 1;
+    z-index: 1000;
     position: fixed;
     bottom: 0;
     right: 0;
@@ -38,7 +39,7 @@
   }
 
   button.chatbox-close {
-    z-index: 1;
+    z-index: 1000;
     position: fixed;
     bottom: 0;
     right: 0;
@@ -87,7 +88,7 @@
 
   .chatbox-popup {
     position: fixed;
-    z-index: 1;
+    z-index: 1000;
     display: flex;
     /* position: absolute; */
     box-shadow: 5px 5px 25px 0 rgba(46, 61, 73, 0.2);
@@ -95,7 +96,7 @@
     display: none;
     bottom: calc(2 * 16px + 52px);
     right: 16px;
-    width: 377px;
+    width: 550px;
     height: auto;
     background-color: #fff;
     border-radius: 16px;
@@ -124,11 +125,16 @@
   .chatbox-popup .chatbox-popup__main {
     box-sizing: border-box;
     width: 100%;
-    padding: calc(2 * 16px) 16px;
-    line-height: calc(16px + 16px / 2);
+    /* padding: calc(2 * 16px) 16px; */
+    padding: 176 16px;
+    /* line-height: calc(16px + 16px / 2); */
     color: #888;
     text-align: center;
+    height: 355px;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
+
 
   .chatbox-popup .chatbox-popup__footer {
     box-sizing: border-box;
@@ -143,15 +149,16 @@
   }
 
   .chatbox-panel {
+    z-index: 1000;
     display: flex;
-    position: absolute;
+    position: fixed;
     box-shadow: 5px 5px 25px 0 rgba(46, 61, 73, 0.2);
     flex-direction: column;
     display: none;
     top: 0;
     right: 0;
     bottom: 0;
-    width: 377px;
+    width: 675px;
     background-color: #fff;
   }
 
@@ -171,10 +178,12 @@
     box-sizing: border-box;
     width: 100%;
     padding: calc(2 * 16px) 16px;
-    line-height: calc(16px + 16px / 2);
+    /* line-height: calc(16px + 16px / 2); */
     color: #888;
     text-align: center;
     flex: 1 1 auto;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .chatbox-panel .chatbox-panel__footer {
@@ -187,3 +196,7 @@
     justify-content: space-around;
     flex: 0 0 auto;
   }
+
+
+
+  

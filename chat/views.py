@@ -120,10 +120,12 @@ def NewChatWithVolunteer(request):
         return HttpResponse("All Volunteers are currently busy! Please wait a moment. And try again later")
 
 
-# def room2(request, room_name):
+def GetChatID(request):
+    chat = Chat.objects.filter(participants__id = request.user.id)
 
-#     return render(request, 'chat/room_withStyle_edited.html', {
-#         'room_name': room_name,
-#     })
+    if chat:
+        return HttpResponse(chat[0].id)
+    else:
+        return HttpResponse("NoReturn")
 
 

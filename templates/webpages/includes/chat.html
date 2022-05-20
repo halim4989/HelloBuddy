@@ -1,0 +1,122 @@
+{% load static %}
+
+
+
+<link href="{% static 'css/chat.css' %}" rel="stylesheet" />
+
+
+<button class="chatbox-open">
+    <i class="fa fa-comment fa-2x" aria-hidden="true"></i>
+</button>
+<button class="chatbox-close">
+    <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+</button>
+<section class="chatbox-popup">
+    <header class="chatbox-popup__header">
+        <aside style="flex: 3">
+            <i class="fa fa-user-circle fa-4x chatbox-popup__avatar" aria-hidden="true"></i>
+        </aside>
+        <aside style="flex: 8">
+            <h1 id="current_username">Hello {{user.username}}</h1>
+            Volunteer (Online)
+        </aside>
+        <aside style="flex: 1">
+            <button class="chatbox-maximize">
+                <i class="fa fa-window-maximize" aria-hidden="true"></i>
+            </button>
+        </aside>
+    </header>
+
+    <!-- MAIN -->
+    <main class="chatbox-popup__main">
+        {% include "webpages/includes/messages.html" %}
+
+    </main>
+    <footer class="chatbox-popup__footer">
+        <aside style="flex: 1; color: #888; text-align: center; cursor: pointer;">
+            <i class="fas fa-phone-alt" aria-hidden="true"></i>
+        </aside>
+        <aside style="flex: 10">
+            <textarea id="message-input-one" type="text" placeholder="Type your message here..." autofocus></textarea>
+        </aside>
+        <aside id="send-msg-now-one" style="flex: 1; color: #888; text-align: center; cursor: pointer;">
+            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+        </aside>
+    </footer>
+</section>
+<section class="chatbox-panel">
+    <header class="chatbox-panel__header">
+        <aside style="flex: 3">
+            <i class="fa fa-user-circle fa-3x chatbox-popup__avatar" aria-hidden="true"></i>
+        </aside>
+        <aside style="flex: 6">
+            <h1>Support System</h1>
+            Volunteer (Online)
+        </aside>
+        <aside style="flex: 3; text-align: right">
+            <button class="chatbox-minimize">
+                <i class="fa fa-window-restore" aria-hidden="true"></i>
+            </button>
+            <button class="chatbox-panel-close">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+        </aside>
+    </header>
+
+    <!-- MAIN -->
+    <main class="chatbox-panel__main" style="flex: 1">
+        {% include "webpages/includes/messages.html" %}
+    </main>
+
+    <footer class="chatbox-panel__footer">
+        <aside style="flex: 1; color: #888; text-align: center; cursor: pointer;">
+            <i class="fas fa-phone-alt" aria-hidden="true"></i>
+        </aside>
+        <aside style="flex: 10">
+            <textarea id="message-input-two" type="text" placeholder="Type your message here..." autofocus></textarea>
+        </aside>
+        <aside id="send-msg-now-two" style="flex: 1; color: #888; text-align: center;cursor: pointer;">
+            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+        </aside>
+    </footer>
+</section>
+
+
+
+
+
+<p id="chatid" class="aaa"></p>
+<script>
+    const chatbox = jQuery.noConflict();
+
+    chatbox(() => {
+        chatbox(".chatbox-open").click(() =>
+            chatbox(".chatbox-popup, .chatbox-close").fadeIn()
+        );
+
+        chatbox(".chatbox-close").click(() =>
+            chatbox(".chatbox-popup, .chatbox-close").fadeOut()
+        );
+
+        chatbox(".chatbox-maximize").click(() => {
+            chatbox(".chatbox-popup, .chatbox-open, .chatbox-close").fadeOut();
+            chatbox(".chatbox-panel").fadeIn();
+            chatbox(".chatbox-panel").css({ display: "flex" });
+        });
+
+        chatbox(".chatbox-minimize").click(() => {
+            chatbox(".chatbox-panel").fadeOut();
+            chatbox(".chatbox-popup, .chatbox-open, .chatbox-close").fadeIn();
+        });
+
+        chatbox(".chatbox-panel-close").click(() => {
+            chatbox(".chatbox-panel").fadeOut();
+            chatbox(".chatbox-open").fadeIn();
+        });
+    });
+    
+</script>
+
+<script src="{% static 'chat/js/reconnecting-websocket.js' %}"></script>
+<script src="{% static 'js/chat.js' %}"></script>
+

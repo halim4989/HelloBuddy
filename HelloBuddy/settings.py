@@ -181,3 +181,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # custom
 AUTH_USER_MODEL = 'chat.User'
+
+LOGIN_REDIRECT_URL = '/home/'
