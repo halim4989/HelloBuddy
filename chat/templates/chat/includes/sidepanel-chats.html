@@ -1,0 +1,21 @@
+{% load static %}
+
+{% load humanize %}
+
+{% for chat in allChats %}
+<li class="contact">
+    <div class="wrap">
+        <span class="contact-status online"></span>
+        <img src="{% static 'chat/images/user-profile.png' %}" alt="" />
+        <div class="meta">
+            <p class='usernameOFchat' id="{{chat.userName | safe }}" hidden></p>
+            <p class="name">{{chat.userName | safe }} <small>{{ chat.date | naturaltime}}</small></p>
+            {% if chat.sentBy == 'volunteer' %}
+            <p class="preview"><span>You: </span>{{chat.lastMessage | safe }}</p>
+            {% else %}
+            <p class="preview"><span>{{chat.lastMessage | safe }}</p>
+            {% endif %}
+        </div>
+    </div>
+</li>
+{% endfor %}

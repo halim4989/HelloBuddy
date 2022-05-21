@@ -20,9 +20,12 @@ from django.contrib import admin
 from django.urls import path
 import chat.views as chatV
 
+app_name = 'base'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/register/', include('main.urls')),
 
     path('NewChatWithVolunteer/', chatV.NewChatWithVolunteer, name='NewChatWithVolunteer'),
     path('UserStatus/NotAvailable/', chatV.UserStatusNotAvailable, name='NotAvailable'),

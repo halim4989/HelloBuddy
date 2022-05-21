@@ -1,11 +1,11 @@
 # chat/views.py
 from django.http import HttpResponse
-from django.shortcuts import redirect, render   
+from django.shortcuts import redirect, render
 # from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
-from .models import Message, Chat
+from .models import Message, Chat, VolunteerMessages, VolunteerChats
 
-from django.core.cache import cache 
+from django.core.cache import cache
 
 
 from django.contrib.auth.decorators import login_required
@@ -16,26 +16,91 @@ from django.contrib.auth.decorators import login_required
 
 User = get_user_model()
 
+
 # @xframe_options_deny
 # @xframe_options_exempt
 @login_required
 def index(request):
 
-    # return render(request, 'chat/index.html', {})
-    chat = request.user.chats.all()
-    if chat.count()>=1:
-        user = chat[0].participants.exclude(pk = request.user.pk)[0].username
-        return redirect(user + '/', permanent=True)
-    else:
-        return redirect("user" + '/', permanent=True)
+
+    allchats = []
+    for chat in VolunteerChats.objects.all():
+        user = chat.owner 
+        # fetching only the llast message
+        lastMessage = chat.messages.order_by('timestamp')[0] 
+        data = {
+            'name':   user.first_name + ' ' + user.last_name,
+            'userName':   user.username, # for link
+            # fetching only the llast message
+            'lastMessage': lastMessage.content,
+            'sentBy': lastMessage.author,
+            # 'date': str(lastMessage.timestamp),
+            'date': lastMessage.timestamp,
+        }
+        allchats.append(data)
 
 
+    return render(request, 'chat/room.html', {
+        'UserName': 'Welcome Volunteer',
+        'ChatUsername': None,
+        # 'ChatID': None,
+        'allChats' : allchats,
+    })
 
 
 
 # @xframe_options_exempt
 @login_required
 def room(request, ChatUsername):
+    # print("************************************")
+    
+    # print(type(request.user))
+    # print(type(request.user.id))
+    # print(type(request.user.first_name))
+
+    # print(request.user)
+    # print(request.user.id)
+    # print(request.user.first_name)
+    # print(request.GET)
+    # print(request.POST)
+    # print("************************************")
+
+
+    # fetching all chats of current user and participants of each chats excluding current user.
+    currentChat = User.objects.get(username = ChatUsername).volunteerchats.get()
+    # chatID = currentChat.id
+    UserName = currentChat.owner.username
+
+
+    allchats = []
+    for chat in VolunteerChats.objects.all():
+        user = chat.owner 
+        # fetching only the llast message
+        lastMessage = chat.messages.order_by('-timestamp')[0] 
+        data = {
+            'name':   user.first_name + ' ' + user.last_name,
+            'userName':   user.username, # for link
+            # fetching only the llast message
+            'lastMessage': lastMessage.content,
+            'sentBy': lastMessage.author,
+            # 'date': str(lastMessage.timestamp),
+            'date': lastMessage.timestamp,
+        }
+        allchats.append(data)
+
+
+    return render(request, 'chat/room.html', {
+        'UserName': UserName,
+        'ChatUsername': ChatUsername,
+        # 'ChatID': chatID,
+        'allChats' : allchats,
+    })
+
+
+
+# @xframe_options_exempt
+@login_required
+def roomOld(request, ChatUsername):
     # print("************************************")
     
     # print(type(request.user))
@@ -73,7 +138,7 @@ def room(request, ChatUsername):
         }
         allchats.append(data)
     
-    return render(request, 'chat/room.html', {
+    return render(request, 'chat/room-old.html', {
         'ChatUsername': ChatUsername,
         'ChatID': chatID,
         'allChats' : allchats,

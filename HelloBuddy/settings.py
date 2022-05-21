@@ -37,9 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'chat',
     'ask',
     'blog',
+    'main',
     'channels',
 ]
 
@@ -183,3 +185,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'chat.User'
 
 LOGIN_REDIRECT_URL = '/home/'
+LOGOUT_REDIRECT_URL = '/home/'

@@ -1,5 +1,6 @@
 # chat/livechatconsumers.py
 import json
+from pprint import pprint
 from django.utils import timezone
 from channels.generic.websocket import AsyncWebsocketConsumer
 
@@ -7,18 +8,21 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 # from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
-from .models import Message, Chat
+from .models import VolunteerMessages, VolunteerChats, Message, Chat
 
 User = get_user_model()
 
+
 class LiveChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        self.chatID = self.scope['url_route']['kwargs']['room_name']
-        self.chat_group_name = 'chat_%s' % self.chatID
+        await self.CreateChat()
+
+        self.chatUser = self.scope['url_route']['kwargs']['room_name']
+        self.chat_group_name = 'chat_%s' % self.chatUser
 
         # print("************************************")
         # print("************************************")
-        # print(self.chatID)
+        # print(self.chatUser)
         # print(self.chat_group_name)
         # print("************************************")
         # print(self.scope)
@@ -41,12 +45,9 @@ class LiveChatConsumer(AsyncWebsocketConsumer):
 
         # Loading previous messages
         msgs = await self.load_msgs_from_db()   # reciving list of JSON
-        # print(msgs)
         for msg in msgs:
             # Sending all messages into WebSocket
             await self.send(text_data=json.dumps(msg))
-
-
 
     async def disconnect(self, close_code):
         # disconnect room after Websocket Disconnect
@@ -55,38 +56,48 @@ class LiveChatConsumer(AsyncWebsocketConsumer):
             self.channel_name
         )
 
+    # using decorator to access db in ASGI
+    @database_sync_to_async
+    def CreateChat(self):
+        chat = VolunteerChats.objects.filter(owner = self.scope['user']).count()
+        
+        if chat:
+            pass
+        else:
+            m = VolunteerMessages.objects.get(id = 6)
+            obj = VolunteerChats.objects.create(owner = self.scope['user'])
+            obj.messages.add(m)
+            obj.save()
 
 
     # using decorator to access db in ASGI
     @database_sync_to_async
     def load_msgs_from_db(self):
-       
-        chat = Chat.objects.filter(participants__id = self.scope['user'].id)     
-        if chat:
-            self.chatID = chat[0].id
-            msgs = chat[0].messages.all().order_by('timestamp')
+        msgs = VolunteerChats.objects.get(owner__id = self.scope['user'].id).messages.all().order_by('timestamp')
 
-            # # checks if user already talking with someone
-            # participants = chat[0].participants.all().count()
-            # if participants == 1:
-            #     isTalking = "no"
-            # else:
-            #     isTalking = "yes"
-
-            # making List with Generator
-            msgsList = [{
-            'sender': msg.author.username,
+        # making List with Generator
+        msgsList = [{
+            'sender': msg.author,
             'message': msg.content,
-            'date' : str(msg.timestamp),
-            } for msg in msgs]
-            # print(msgsList)
+            'date': str(msg.timestamp),
+        } for msg in msgs]
+        # print(msgsList)
 
-            # sending a list of JSON
-            return msgsList
+        # sending a list of JSON
+        return msgsList
 
-        else:
-            return []
 
+    @database_sync_to_async
+    def save_msg_to_db(self, sender, txt):
+
+        
+        user = User.objects.get(username=self.chatUser)
+        # print("RUNNING RUNNING RUNNING ")
+        msg = VolunteerMessages.objects.create(author = sender, content = txt)
+
+        current_chat = VolunteerChats.objects.get(owner__id = user.id)
+        # adding msg
+        current_chat.messages.add(msg)
 
 
 
@@ -101,7 +112,10 @@ class LiveChatConsumer(AsyncWebsocketConsumer):
         message = text_data_json['message']
 
         # saving massage into db
-        # await self.save_msg_to_db(sender, message)
+        await self.save_msg_to_db(sender, message)
+        # print('\n\n*** *** ***')
+        # print(f"{sender}, {message}")
+
 
         # Send message to Channel
         await self.channel_layer.group_send(
@@ -110,12 +124,12 @@ class LiveChatConsumer(AsyncWebsocketConsumer):
                 'type': 'chat_message',
                 'message': message,
                 'sender': sender,
-                'date' : str(timezone.now())
+                'date': str(timezone.now())
             }
         )
 
-
     # Receive message from Channel
+
     async def chat_message(self, event):
         # print("***event***")
         # print(event)
@@ -129,4 +143,3 @@ class LiveChatConsumer(AsyncWebsocketConsumer):
             'message': message,
             'date': date,
         }))
-

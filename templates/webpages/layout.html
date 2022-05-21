@@ -67,9 +67,10 @@
           </div>
 
           {% if user.is_authenticated %}
-          <a href="{% url 'logout' %}?next=/home/" class="btn btn-light rounded-pill text-primary py-2 px-4 ms-lg-5">LogOut</a>
+          <!-- <a href="{% url 'logout' %}?next=/home/" class="btn btn-light rounded-pill text-primary py-2 px-4 ms-lg-5">LogOut</a> -->
+          <a href="{% url 'logout' %}" class="btn btn-light rounded-pill text-primary py-2 px-4 ms-lg-5">LogOut</a>
           {% else %}
-          <a href="/accounts/login/" class="btn btn-light rounded-pill text-primary py-2 px-4 ms-lg-5">Sign In</a>
+          <a href="{% url 'login' %}" class="btn btn-light rounded-pill text-primary py-2 px-4 ms-lg-5">Sign In</a>
           {% endif %}
         
         </div>
@@ -169,7 +170,12 @@
   <!-- Template Javascript -->
   <script src="{% static 'js/main.js' %}"></script>
 
+  {% if user.is_staff %}
+  {% include "webpages/includes/staffchat.html" %}
+  {% else %}
   {% include "webpages/includes/chat.html" %}
+  {% endif %}
+
 </body>
 
 </html>

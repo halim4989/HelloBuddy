@@ -32,7 +32,7 @@
 
         $(
             `<li class= ${className} style="overflow-wrap: break-word">       
-        <img src="{% static 'chat/images/user-profile.png' %}" alt="">
+        
         <p>
           ${message}<br> 
           <small>
@@ -81,8 +81,10 @@
         return prefix;
     }
 
-    // let roomName = userName;
-    let roomName = getID();
+
+    // {% if user.is_authenticated %}
+    let roomName = userName;
+    // let roomName = getID();
 
 
     // WebSocket connection
@@ -99,6 +101,8 @@
             "ws://" + window.location.host + "/ws/livechat/" + roomName + "/"
         );
     }
+    // {% endif %}
+
 
     chatSocket.onmessage = function (e) {
         const data = JSON.parse(e.data);
@@ -136,9 +140,9 @@
                 message: message,
             })
         );
-        console.log('msg msg');
-        console.log(sender);
-        console.log(message);
+        // console.log('msg msg');
+        // console.log(sender);
+        // console.log(message);
     }
 
 
@@ -146,7 +150,7 @@
         // console.log('one');
         let message = $("#message-input-one").val();
         // message = document.getElementById("message-input-one").value
-        console.log(message);
+        // console.log(message);
         sendMessage(message);
     });
     $("#send-msg-now-two").click(function () {

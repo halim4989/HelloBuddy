@@ -142,7 +142,7 @@ Website: http://emilcarlsson.se/
       <div class="content">
         <div class="contact-profile">
           <img src="{% static 'chat/images/user-profile.png' %}" alt="" />
-          <p>Harvey Specter .</p>
+          <p>Hasinur Rahman</p>
           <small
             id="screen"
             style="font-size: 14px; float: right; line-height: 13px"
@@ -337,6 +337,22 @@ Website: http://emilcarlsson.se/
           // dataType: "json",
           url:"/UserStatus/Available/",
           // data:{
+            //   post_id: catid,
+            // },
+            success: function(data){
+              // alert("i got data now i will parse it as i want to display it");
+              alert(data);
+            }
+            
+          })
+        });
+      // Changing Online status
+      $("#status-busy").click(function(){
+        $.ajax({
+          type:"GET",
+          // dataType: "json",
+          url:"/UserStatus/NotAvailable/",
+          // data:{
           //   post_id: catid,
           // },
           success: function(data){
@@ -346,11 +362,14 @@ Website: http://emilcarlsson.se/
 
         })
       });
-      $("#status-busy").click(function(){
+
+
+      // User asking Volunteers for chat
+      $("#addcontact").click(function(){
         $.ajax({
           type:"GET",
           // dataType: "json",
-          url:"/UserStatus/NotAvailable/",
+          url:"/NewChatWithVolunteer/",
           // data:{
           //   post_id: catid,
           // },
@@ -520,11 +539,11 @@ Website: http://emilcarlsson.se/
         // checks If HTTPs or not
         // chatSocket = new WebSocket(
         chatSocket = new ReconnectingWebSocket(
-          "wss://" + window.location.host + "/ws/chat/" + roomName + "/"
+          "wss://" + window.location.host + "/ws/chat/old/" + roomName + "/"
         );
       } else {
         chatSocket = new ReconnectingWebSocket(
-          "ws://" + window.location.host + "/ws/chat/" + roomName + "/"
+          "ws://" + window.location.host + "/ws/chat/old/" + roomName + "/"
         );
       }
       // {% endif %}

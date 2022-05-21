@@ -16,16 +16,16 @@
 
 </div>
 
-<div id="volunteer-btn">
+<!-- <div id="volunteer-btn">
     <b class="bg-info rounded-pill">Talk With a Volunteer</b>
-</div>
+</div> -->
 
 {% else %}
 
 <div id="volunteer-btn">
     <br><br>
     <br><br>
-    <b class="bg-info rounded-pill">Please Sign in to Talk With a Volunteer</b>
+    <a href="{% url 'login' %}" class="bg-info rounded-pill">Please Sign in to Talk With a Volunteer</a>
 </div>
 
 {% endif %}

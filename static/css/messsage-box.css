@@ -58,6 +58,15 @@
 }
 
 #volunteer-btn b {
+    color: #0c0c0c;
+    padding-right: 23px;
+    padding-left: 23px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    cursor: pointer;
+}
+#volunteer-btn a {
+    color: #0c0c0c;
     padding-right: 23px;
     padding-left: 23px;
     padding-top: 5px;
