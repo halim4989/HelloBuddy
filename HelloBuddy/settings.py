@@ -114,8 +114,8 @@ CACHES = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django_channels_tuto',
-        'USER': 'django_channels_tuto',
+        'NAME': 'hellobuddy',
+        'USER': 'hellobuddy',
         'PASSWORD': '4989@4989',
         # 'HOST': '127.0.0.1',
         'HOST': 'localhost',
