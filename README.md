@@ -44,6 +44,8 @@ In project folder in cli (foy windows use `py` And for linux use `python` or `py
 
 ```bash
 py manage.py makemigrations
+```
+```bash
 py manage.py migrate
 ```
 This will check all `models.py` files and create tables in Database and more additional tables for Users data
