@@ -64,7 +64,9 @@ class LiveChatConsumer(AsyncWebsocketConsumer):
         if chat:
             pass
         else:
-            m = VolunteerMessages.objects.get(id = 6)
+            m = VolunteerMessages(author="volunteer", content ="Welcome")
+            m.save()
+            # v = VolunteerMessages.objects.get(id = 6)
             obj = VolunteerChats.objects.create(owner = self.scope['user'])
             obj.messages.add(m)
             obj.save()
