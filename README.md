@@ -16,7 +16,7 @@ NOw Install Docker and if needed Install `WSL-2`.
 ### Installing Python Dependencies
 `cd` into the project folder
 ```bash
-pip install -r requirements
+pip install -r requirements.txt
 ```
 This will install Django-3.2.13, mysqlclient, django-redis, channels-redis
 
