@@ -1,4 +1,4 @@
 django==3.2.13
+mysqlclient==2.1.0
 django-redis
 channels-redis
-mysqlclient
