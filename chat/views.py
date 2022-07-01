@@ -27,7 +27,7 @@ def index(request):
     for chat in VolunteerChats.objects.all():
         user = chat.owner 
         # fetching only the llast message
-        lastMessage = chat.messages.order_by('timestamp')[0] 
+        lastMessage = chat.messages.order_by('-timestamp')[0] 
         data = {
             'name':   user.first_name + ' ' + user.last_name,
             'userName':   user.username, # for link
