@@ -73,5 +73,28 @@ For example:
 py manage.py runserver 192.168.1.105:9000
 ```
 
-# GitHub
+# Database Import (`Optional`)
+Import the Database Backup file to view test chat messages with users. the backup also contains some Normal Users account and Volunteer accounts
+
+To import go to your database in phpMyadmin and drop all `tables` in the database. Make sure there is no table present in the database, since even after selecting all tables and droping it still `keeps 1 or 2 taables` in the database.
+
+After ensuring no table present go to Import tab, then Drag and Drop the `DATABASE_Backup.sql` file on the page or `Choose File` from your computer and click `Go`  on the bottom of the page and wait for it to finish.
+
+Now in CLI do
+```bash
+py manage.py makemigrations
+```
+```bash
+py manage.py migrate
+```
+Then Run the project. It should display previous chats.
+
+Now use Username `halim` and pass `4989` to login in as a Superuser Account OR create a new SuperUser.
+
+for a Normal User account, create a new account in the website.
+
+# Note
+Only a ***Normal User account*** and ***SuperUser/admin or Volunteer account*** can chat with each other. so to chat one Normal User account and one Admin account is needed.
+
+# GitHub Link
 [GitHub project URL](https://github.com/halim4989/HelloBuddy)
