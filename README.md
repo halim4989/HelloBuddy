@@ -73,6 +73,8 @@ For example:
 py manage.py runserver 192.168.1.105:9000
 ```
 
+
+
 # Database Import (`Optional`)
 Import the Database Backup file to view test chat messages with users. the backup also contains some Normal Users account and Volunteer accounts
 
@@ -92,6 +94,9 @@ Then Run the project. It should display previous chats.
 Now use Username `halim` and pass `4989` to login in as a Superuser Account OR create a new SuperUser.
 
 for a Normal User account, create a new account in the website.
+
+
+
 
 # Note
 Only a ***Normal User account*** and ***SuperUser/admin or Volunteer account*** can chat with each other. so to chat one Normal User account and one Admin account is needed.
