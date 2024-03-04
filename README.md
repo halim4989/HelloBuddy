@@ -1,7 +1,7 @@
 # HelloBuddy
 Final project -university.
 
-###### This project uses django connect for websocket <br> Redis for message caching
+###### This project uses django channels for websocket <br> Redis for message caching
 
 # Installation
 ### Required Softwares
