@@ -1,12 +1,9 @@
 # HelloBuddy
-Final project for graduation -university.
+Final project -university.
 
-
+###### This project uses django connect for websocket <br> Redis for message caching
 
 # Installation
-
-
-
 ### Required Softwares
 Install `python-3.7.9`
 
