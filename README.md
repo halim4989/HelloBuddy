@@ -7,7 +7,7 @@ Final project -university.
 ### Required Softwares
 Install `python-3.7.9`
 
-Install `XAMPP` with `PHP 7.4.29` for MySQL Database
+For `XAMPP` Install version `7.4.29` it's error free.
 
 we will need `redis` for in memory cache for messaging and tracking online users. we'll use `Docker` to run `redis`.
 
@@ -25,7 +25,7 @@ This will install Django-3.2.13, mysqlclient, django-redis, channels-redis
 
 
 ### Setting up Database
-With `XAMPP` go to phpmyadmin and create a new Database named `hellobuddy` and create a new user named `hellobuddy` with password `4989@4989`
+In MySQL create a new Database named `hellobuddy` and create a new user named `hellobuddy` with password `4989@4989`
 
 If you wish to use different user, pass, or db name then change these in `HelloBuddy/settings.py` at line `114` DATABASES Dictionary.
 
