@@ -77,21 +77,23 @@ TEMPLATES = [
 WSGI_APPLICATION = 'HelloBuddy.wsgi.application'
 ASGI_APPLICATION = 'HelloBuddy.asgi.application'
 
+
+redis_host = 'redis'
 # Redis Channel
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
+            "hosts": [(redis_host, 6379)],
         },
     },
 }
 
-# Redis For Caching
+# Redis Caching
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
+        "LOCATION": f"redis://{redis_host}:6379/1",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient"
         },
@@ -118,8 +120,9 @@ DATABASES = {
         'USER': 'hellobuddy',
         'PASSWORD': '4989@4989',
         # 'HOST': '127.0.0.1',
-        'HOST': 'localhost',
-        # 'PORT': '3306',
+        # 'HOST': 'localhost',
+        'HOST': 'mysql',
+        'PORT': '3306',
         'OPTIONS': {
             'sql_mode': 'STRICT_ALL_TABLES',
 
