@@ -11,7 +11,7 @@ git clone https://github.com/halim4989/HelloBuddy.git
 cd HelloBuddy
 ```
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 This will run all the needed Containers in docker and expose the app on 8000 port.
 
