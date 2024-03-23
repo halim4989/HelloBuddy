@@ -5,6 +5,9 @@ Final project -university.
 
 # Running The App
 ```bash
+git clone https://github.com/halim4989/HelloBuddy.git
+```
+```bash
 cd HelloBuddy
 ```
 ```bash
