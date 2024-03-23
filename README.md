@@ -3,11 +3,30 @@ Final project -university.
 
 ###### This project uses django channels for websocket <br> Redis for message caching
 
-# Installation
-### Required Softwares
-Install `python-3.7.9`
+# Running The App
+```bash
+docker-compose up -d
+```
+This will run all the needed Containers in docker and expose the app port on 8000.
 
-For `XAMPP` Install version `7.4.29` it's error free.
+By default this will restore a backup of the database from `backup_dumpdata.JSON`, to view/test chat messages with users. The backup also contains some Normal Users account and Volunteer accounts. All account password is `4989` 
+
+Users in the database.
+```
+halim
+zubair
+user01
+user10
+user5
+rohim
+```
+To do a frash stert just comment-out the line from `docker-entrypoint.sh` file
+
+# Manual Installation
+### Required Softwares
+Built on `python-3.7.9`
+
+If you want to go with `XAMPP` Install version `7.4.29` it's error free.
 
 we will need `redis` for in memory cache for messaging and tracking online users. we'll use `Docker` to run `redis`.
 
