@@ -121,7 +121,7 @@ DATABASES = {
         'PASSWORD': '4989@4989',
         # 'HOST': '127.0.0.1',
         # 'HOST': 'localhost',
-        'HOST': 'mysql',
+        'HOST': 'db',
         'PORT': '3306',
         'OPTIONS': {
             'sql_mode': 'STRICT_ALL_TABLES',
