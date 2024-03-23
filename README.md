@@ -19,8 +19,8 @@ By default this will restore some data of the database from `DATABASE_dumpdata.j
 
 All account password is `4989`. Users in the database:
 ```
-halim
-zubair
+halim   **
+zubair  **
 user01
 user10
 user5
