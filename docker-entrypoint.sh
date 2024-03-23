@@ -16,8 +16,7 @@ then
     python manage.py migrate
 
     # need to migrate before restore
-    echo "Restoring some data to the Database..."
-    python -Xutf8 ./manage.py loaddata DATABASE_dumpdata.json
+    echo "Restoring some data to the Database..." && python -Xutf8 ./manage.py loaddata DATABASE_dumpdata.json
 
 fi
 
