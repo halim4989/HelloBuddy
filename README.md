@@ -13,9 +13,9 @@ cd HelloBuddy
 ```bash
 docker-compose up -d
 ```
-This will run all the needed Containers in docker and expose the app port on 8000.
+This will run all the needed Containers in docker and expose the app on 8000 port.
 
-By default this will restore some data of the database from `DATABASE_dumpdata.json`, to view/test chat messages with users. The backup also contains some Normal Users account and Volunteer accounts, some messages, some blogs etc. 
+By default this will restore some data of the database from `DATABASE_dumpdata.json` file, to view/test chat messages with users. The backup also contains some Normal Users account and Volunteer accounts, some messages, some blogs etc. 
 
 All account password is `4989`. Users in the database:
 ```
