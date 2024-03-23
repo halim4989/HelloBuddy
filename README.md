@@ -31,7 +31,7 @@ Backup created using:
 ```bash
 python -Xutf8 ./manage.py dumpdata --natural-foreign --natural-primary --indent=2 admin, ask, auth, blog, chat -o DATABASE_dumpdata.json
 ```
-add `.gz` at the end of file namme for automatic compression.
+add `.gz` at the end of file namme for automatic compression without affecting `loaddata`.
 
 # Manual Installation
 ### Required Softwares
