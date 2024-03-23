@@ -12,7 +12,7 @@ docker-compose up -d
 ```
 This will run all the needed Containers in docker and expose the app port on 8000.
 
-By default this will restore a backup of the database from `backup_dumpdata.JSON`, to view/test chat messages with users. The backup also contains some Normal Users account and Volunteer accounts. All account password is `4989` 
+By default this will restore a backup of the database from `backup_dumpdata.json`, to view/test chat messages with users. The backup also contains some Normal Users account and Volunteer accounts, some messages, some blogs etc. All account password is `4989` 
 
 Users in the database.
 ```
@@ -23,7 +23,18 @@ user10
 user5
 rohim
 ```
-To do a frash stert just comment-out the line from `docker-entrypoint.sh` file
+To do a fresh start just comment-out the line `python -Xutf8 ./manage.py loaddata DATABASE_dumpdata.json` from `docker-entrypoint.sh` file
+
+To support spacial characters and to Solve error CommandError: Unable to serialize database: 'charmap' codec can't encode characters in position 1-3: character maps to <undefined>. used `-Xutf8` in with command.
+Backup created using:
+
+```bash
+python -Xutf8 ./manage.py dumpdata --natural-foreign --natural-primary --indent=2 admin, ask, auth, blog, chat -o DATABASE_dumpdata.json.gz
+```
+or
+```bash
+python -Xutf8 ./manage.py dumpdata --natural-foreign --natural-primary --indent=2 admin, ask, auth, blog, chat -o DATABASE_dumpdata.json
+```
 
 # Manual Installation
 ### Required Softwares
