@@ -3,11 +3,41 @@ Final project -university.
 
 ###### This project uses django channels for websocket <br> Redis for message caching
 
-# Installation
-### Required Softwares
-Install `python-3.7.9`
+# Running The App
+```bash
+cd HelloBuddy
+```
+```bash
+docker-compose up -d
+```
+This will run all the needed Containers in docker and expose the app port on 8000.
 
-For `XAMPP` Install version `7.4.29` it's error free.
+By default this will restore some data of the database from `DATABASE_dumpdata.json`, to view/test chat messages with users. The backup also contains some Normal Users account and Volunteer accounts, some messages, some blogs etc. 
+
+All account password is `4989`. Users in the database:
+```
+halim
+zubair
+user01
+user10
+user5
+rohim
+```
+To do a fresh start, from file `docker-entrypoint.sh` comment-out the line `python -Xutf8 ./manage.py loaddata DATABASE_dumpdata.json`
+
+To support spacial characters and to Solve error 'CommandError: Unable to serialize database: 'charmap' codec can't encode characters in position 1-3: character maps to <undefined>' have to used `-Xutf8` in with command.
+Backup created using:
+
+```bash
+python -Xutf8 ./manage.py dumpdata --natural-foreign --natural-primary --indent=2 admin, ask, auth, blog, chat -o DATABASE_dumpdata.json
+```
+add `.gz` at the end of file namme for automatic compression without affecting `loaddata`.
+
+# Manual Installation
+### Required Softwares
+Built on `python-3.7.9`
+
+If you want to go with `XAMPP` Install version `7.4.29` it's error free.
 
 we will need `redis` for in memory cache for messaging and tracking online users. we'll use `Docker` to run `redis`.
 
