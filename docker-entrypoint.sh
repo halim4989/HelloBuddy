@@ -8,14 +8,20 @@ then
       sleep 1
     done
     echo "MySQL started"
+
     echo "Appling database migrations..."
     python manage.py makemigrations
+
     echo "Migration started"
     python manage.py migrate
-    # python manage.py runserver 0.0.0.0:8000
+
+    # need to migrate before restore
+    echo "Restoring some data to the Database..."
+    python -Xutf8 ./manage.py loaddata DATABASE_dumpdata.json
+
 fi
 
-# Décommenter pour supprimer la bdd à chaque redémarrage (danger)
+# Uncomment to delete the database on each reboot (danger)
 # echo "Clear entire database"
 # python manage.py flush --no-input
 

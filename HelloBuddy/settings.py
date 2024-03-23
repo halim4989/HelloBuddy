@@ -78,7 +78,9 @@ WSGI_APPLICATION = 'HelloBuddy.wsgi.application'
 ASGI_APPLICATION = 'HelloBuddy.asgi.application'
 
 
+# redis_host = 'localhost'
 redis_host = 'redis'
+
 # Redis Channel
 CHANNEL_LAYERS = {
     'default': {
