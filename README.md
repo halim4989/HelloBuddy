@@ -5,6 +5,9 @@ Final project -university.
 
 # Running The App
 ```bash
+cd HelloBuddy
+```
+```bash
 docker-compose up -d
 ```
 This will run all the needed Containers in docker and expose the app port on 8000.
