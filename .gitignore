@@ -1,6 +1,5 @@
-
+.env
 .log
 ddata/
 *__pycache__/
-
 */migrations/*
