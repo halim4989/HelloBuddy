@@ -2,6 +2,7 @@
 Final project -university.
 
 ###### This project uses django channels for websocket <br> Redis for message caching
+### Now devloping for docarize production server
 
 # Running The App
 ```bash
