@@ -78,7 +78,7 @@ Check in Docker Desktop if it's running or not
 In project folder in cli (foy windows use `py` And for linux use `python` or `python3` or `python37` whichever works)
 
 ```bash
-py manage.py makemigrations
+py manage.py makemigrations chat blog ask
 ```
 ```bash
 py manage.py migrate
