@@ -1,1 +1,4 @@
 ddata/
+staticfiles
+__pycache__
+migrations
