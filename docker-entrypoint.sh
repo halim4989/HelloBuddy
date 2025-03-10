@@ -10,7 +10,7 @@ then
     echo "MySQL started"
 
     echo "Appling database migrations..."
-    python manage.py makemigrations
+    python manage.py makemigrations chat blog ask main
 
     echo "Migration started"
     python manage.py migrate
