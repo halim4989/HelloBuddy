@@ -3,8 +3,11 @@
 
 > **It will take 50 seconds or more to start for the first time.**
 >
-> It's hosted in a free server. The instance doesn't stay live for long. 
-it will spin up its instance when it receives the first request to the server.'
+> It's hosted in a free server. The instance doesn't stay live for long. it will spin up its instance when it receives the first request to the server.
+
+Deployed by using the command `python -m gunicorn HelloBuddy.asgi:application -k uvicorn.workers.UvicornWorker`
+
+
 
 # HelloBuddy
 Final project -university.
