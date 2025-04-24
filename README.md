@@ -1,7 +1,7 @@
 ## Live Demo
 [Project Link](https://hellobuddy-render.onrender.com)
 
-> **It will take 50 seconds or more to load for the first time.**
+> **It will take 50 seconds or more to start for the first time.**
 >
 > It's hosted in a free server. The instance doesn't stay live for long. 
 it will spin up its instance when it receives the first request to the server.'
